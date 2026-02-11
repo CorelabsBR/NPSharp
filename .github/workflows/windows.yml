@@ -76,34 +76,32 @@ jobs:
       # -------------------------
       # ZIP
       # -------------------------
-      - name: Zip NPSharp Portable
+            - name: Zip NPSharp Portable
         shell: pwsh
         run: |
           $build = Join-Path $env:GITHUB_WORKSPACE "out"
 
           if (!(Test-Path $build)) {
-            Write-Error "Pasta 'out' não encontrada"
+            Write-Error "Pasta out não existe"
             exit 1
           }
 
+          Write-Host "Pastas encontradas em out:"
+          Get-ChildItem $build -Directory
+
           $dir = Get-ChildItem $build -Directory |
-            Where-Object { $_.Name -like "*win32-x64*" } |
+            Where-Object { $_.Name -match "win32" } |
             Select-Object -First 1
 
           if (!$dir) {
-            Write-Error "Build win32-x64 não encontrada na pasta out"
+            Write-Error "Nenhuma build win32 encontrada na pasta out"
             exit 1
           }
 
-          $zipPath = Join-Path $env:GITHUB_WORKSPACE "npsharp-windows-portable.zip"
+          Write-Host "Usando build: $($dir.Name)"
 
-          if (Test-Path $zipPath) {
-            Remove-Item $zipPath -Force
-          }
-
-          Compress-Archive -Path "$($dir.FullName)\*" -DestinationPath $zipPath
-
-          Write-Host "ZIP gerado em: $zipPath"
+          Compress-Archive -Path "$($dir.FullName)\*" `
+            -DestinationPath "$env:GITHUB_WORKSPACE\npsharp-windows-portable.zip"
 
       # -------------------------
       # UPLOAD DO ARTEFATO
