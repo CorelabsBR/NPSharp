@@ -1,7 +1,7 @@
 # NPSharp — Open Source Code Editor
 
-![Feature Requests](https://img.shields.io/github/issues/NPSharp/NPSharp/feature-request.svg)
-![Bugs](https://img.shields.io/github/issues/NPSharp/NPSharp/bug.svg)
+![Feature Requests](https://img.shields.io/github/issues/SEU_USUARIO/CodeForge/feature-request.svg)
+![Bugs](https://img.shields.io/github/issues/SEU_USUARIO/CodeForge/bug.svg)
 ![Community Chat](https://img.shields.io/badge/chat-community-yellow.svg)
 
 ---
